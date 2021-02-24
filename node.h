@@ -1,16 +1,16 @@
+#pragma once
 #include <bits/stdc++.h>
 
-/*
+/**
     Node class represents our vertexes of graph.
     It has id as an identifier, and list of children nodes.
-*/
+**/
 class Node {
-    unsigned id;
-    std::vector<Node*> children;
 
 public:
-    Node (){}
+    Node (): id(0){}
     Node (unsigned id): id(id){}
+    Node (unsigned id, const std::vector<Node*>& children): id(id), children(children){}
 
     const unsigned get_id() {
         return id;
@@ -20,7 +20,7 @@ public:
         children.push_back(child);
     }
 
-    const std::vector<Node*> get_children(){
+    const std::vector<Node*> get_children() {
         return children;
     }
 
@@ -28,4 +28,8 @@ public:
         os << node.id;
         return os;
     }
+
+private:
+    std::vector<Node*> children;
+    unsigned id;
 };
