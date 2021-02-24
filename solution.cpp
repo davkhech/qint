@@ -1,12 +1,16 @@
 #include "solution.h"
-using namespace std;
+
+#include <algorithm>
+#include <stack>
+#include <unordered_map>
+
 
 /**
     Helper function that performs a depth first search and keeps maximum distances of vertexes from root.
 **/
-void dfs(Node* root, unordered_map<Node*, int>& ordering){
+void dfs(Node* root, std::unordered_map<Node*, int>& ordering){
     Node* current_node;
-    stack<Node*> s;
+    std::stack<Node*> s;
 
     ordering[root] = 0;
     s.push(root);
@@ -22,24 +26,26 @@ void dfs(Node* root, unordered_map<Node*, int>& ordering){
             if (ordering.find(child) == ordering.end()) {
                 ordering[child] = next_order;
             }
-            ordering[child] = max(next_order, ordering[child]);
+            ordering[child] = std::max(next_order, ordering[child]);
         }
     }
 }
 
 
-void find_independent_groups(Node* root, vector<vector<Node*>>& groups){
-    unordered_map<Node*, int> ordering;
+void find_independent_groups(Node* root, std::vector<std::vector<Node*>>& groups){
+    std::unordered_map<Node*, int> ordering;
     dfs(root, ordering);
 
-    auto max_value = max_element(ordering.begin(), ordering.end(), 
-                                [](const pair<Node*, int>& p1, const pair<Node*, int>& p2) { 
-                                    return p1.second < p2.second; 
-                                });
+    auto max_value = std::max_element(
+        ordering.begin(), ordering.end(), 
+        [](const std::pair<Node*, int>& p1, const std::pair<Node*, int>& p2) { 
+            return p1.second < p2.second; 
+        });
+
     groups.resize((max_value -> second) + 1);
 
     for (auto& entry: ordering) {
         groups[entry.second].push_back(entry.first);
     }
-    reverse(groups.begin(), groups.end());
+    std::reverse(groups.begin(), groups.end());
 }

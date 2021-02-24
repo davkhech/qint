@@ -1,35 +1,43 @@
 #pragma once
-#include <bits/stdc++.h>
+#include <vector>
 
 /**
-    Node class represents our vertexes of graph.
+    Node class represents our vertices of graph.
     It has id as an identifier, and list of children nodes.
 **/
 class Node {
 
 public:
-    Node (): id(0){}
-    Node (unsigned id): id(id){}
-    Node (unsigned id, const std::vector<Node*>& children): id(id), children(children){}
+    Node (): children()
+           , id(0)
+    {}
 
-    const unsigned get_id() {
-        return id;
-    }
+    Node (unsigned id): id(id)
+    {}
 
-    void insert_child(Node* child) {
-        children.push_back(child);
-    }
+    Node (unsigned id, const std::vector<Node*>& children): children(children)
+                                                          , id(id)
+    {}
 
-    const std::vector<Node*> get_children() {
-        return children;
-    }
+    const unsigned get_id() const;
 
-    friend std::ostream& operator<<(std::ostream& os, const Node& node) {
-        os << node.id;
-        return os;
-    }
+    void insert_child(Node* child);
+
+    const std::vector<Node*> get_children() const;
 
 private:
     std::vector<Node*> children;
     unsigned id;
 };
+
+inline const unsigned Node::get_id() const {
+    return id;
+}
+
+inline void Node::insert_child(Node* child) {
+    children.push_back(child);
+}
+
+inline const std::vector<Node*> Node::get_children() const {
+    return children;
+}

@@ -1,6 +1,8 @@
 #pragma once
-#include <bits/stdc++.h>
+
 #include "node.h"
+
+#include <vector>
 
 /**
     Finds indepentent groups in a DAG.

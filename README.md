@@ -1,9 +1,9 @@
 # qint
 
 Given a directed acyclic graph, we need to group intependent vertices.
-We can assume that it discribes some computation, and we need to find which parts we can do in parallel, and for which verticies we need to wait until its dependencies are resolved.
+We can assume that it describes some computation, and we need to find which parts we can do in parallel, and for which verticies we need to wait until its dependencies are resolved.
 
-We also assume that weights of edgies is 1 i.e. every piece of computation takes a 1 unit of time to finish.
+We also assume that weights of edges is 1 i.e. every piece of computation takes a 1 unit of time to finish.
 
 In order to solve this problem, we use the depth first search approach. We traverse from the root node and find the maximum number of steps needed to reach the given vertex.
 For example, in this graph R --> v1 --> v2
