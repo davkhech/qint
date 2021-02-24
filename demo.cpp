@@ -4,39 +4,39 @@
 #include <iostream>
 #include <vector>
 
-using namespace std;
-
 /**
- * 
+ * Demo program to see how vertices are grouped. Insert graph from console.
  * **/
 
 int main() {
+    std::cout << "Enter number of verticies and edges\n";
+
     int N, M;
-    cout << "Enter number of verticies and edges\n";
-    cin >> N >> M;
+    std::cin >> N >> M;
 
-    vector<Node*> nodes;
+    std::vector<Node*> nodes;
     nodes.reserve(N);
-
     for (unsigned i = 0; i < N; ++i) {
-        nodes.emplace_back(new Node(i));
+        nodes.push_back(new Node(i));
     }
 
+    std::cout << "Enter M pairs of numbers, to connect the vertices i and j\n";
     int x, y;
     for (int i = 0; i < M; ++i) {
-        cin >> x >> y;
+        std::cin >> x >> y;
         nodes[x] -> insert_child(nodes[y]);
     }
 
-    vector<vector<Node*>> groups;
+    std::vector<std::vector<Node*>> groups;
     find_independent_groups(nodes[0], groups);
 
+    std::cout << "Result:\n";
     for (int i = 0; i < groups.size(); ++i) {
-        cout << i << " -> ";
+        std::cout << i << " -> ";
         for (auto& v: groups[i]) {
-            cout << v -> get_id() << " ";
+            std::cout << v -> get_id() << " ";
         }
-        cout << endl;
+        std::cout << std::endl;
     }
 
     return 0;
